@@ -140,3 +140,8 @@ h1 {
 #temperature {
   font-size: 50px;
 }
+
+.forecast {
+  background: white;
+  color: red;
+}
