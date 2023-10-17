@@ -15,6 +15,7 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,14 +31,14 @@
         <div class="row">
           <div class="col">
             <div class="date-full text-center">
-              <span id="date"><small></small></span>
+              <span id="date"></span>
             </div>
           </div>
-          <div class="col-3" id="time">11:23 AM</div>
+          <div class="col-3" id="hour"></div>
           <section form class="mt-3">
               <div class="row">
                 <div class="col-sm text-center">
-                  <span id="weatherDescription">Sunny</span>
+                  <span id="description">Sunny</span>
                   <br />
                   <img
                     src="icon/all/clear-day.svg"
@@ -45,7 +46,7 @@
                     id="main-icon"
                     width="40"
                   />
-                   <form class="search-form" id="searchCity"></form>
+                   <form class="search-form" id="searchCity">
                 </div>
                 <input
                   type="search"
@@ -62,7 +63,7 @@
         </div>
         <section class="city">
           <div class="row">
-            <h1 id="city">Denver</h1>
+            <h1 id="city"></h1>
             <div class="col-6" id="temperature-side">
               <span class="temperature" id="temperature">22°</span>
               <span class="units">
@@ -73,9 +74,9 @@
             <div class="col-6" id="description-side">
              <div class="weatherInfo">
             <ul id="weatherInformation">
-              <li id="humidity"> d</li>
-              <li id="windSpeed"> d</li>
-              <li id="feelsLike">d</li>
+              <li id="humidity"> </li>
+              <li id="wind"> </li>
+              <li id="feelsLike"></li>
             </ul>
             </div>
       </div>
