@@ -19,10 +19,6 @@ setInterval(updateDate, 1000);
 setInterval(getFormattedTime, 100);
 
 // OpenWeather API
-let apiKey = "c76db1bd2c2a808bab15d20555e59a59";
-let units = "metric";
-apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=${units}`;
-axios.get(apiUrl).then(displayResults);
 
 function displayResults(response) {
   console.log(response.data);
@@ -44,12 +40,16 @@ function displayResults(response) {
   windElement.innerHTML = `Wind: ${wind} km/h`;
   humidityElement.innerHTML = `Humidity: ${humidity}%`;
   feelsLike.innerHTML = `Feels Like: ${apTemp}°C`;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 
   document.querySelector("#hour").innerHTML = getFormattedTime(
     response.data.timezone
   );
   const formattedTimezone = getFormattedTime(response.data.timezone);
-  timeBackground(formattedTimezone);
   getForecast(response.data.coord);
 }
 
@@ -75,3 +75,75 @@ function getFormattedTime(timezoneOffset) {
     .padStart(2, "0")}:${localMinutes.toString().padStart(2, "0")}`;
   return formattedTime;
 }
+
+function search(city) {
+  let apiKey = "c76db1bd2c2a808bab15d20555e59a59";
+  let units = "metric";
+  apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayResults);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#cityInput");
+  search(cityInputElement.value);
+}
+
+let form = document.querySelector("#searchCity");
+form.addEventListener("submit", handleSubmit);
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row mt-3">`;
+  forecast.forEach(function (forecastDate, index) {
+    if (index > 0 && index < 7) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+      <div class= dayForecast>
+        <div class="weather-forecast-date">${formatDay(forecastDate.dt)}</div>
+        <img src="${getIconSrc(
+          forecastDate.weather[0].icon
+        )}" alt="Clear" id="icon" class="float-left" />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> ${Math.round(
+            forecastDate.temp.max
+          )}° </span>
+          <span class="weather-forecast-temperature-min"> ${Math.round(
+            forecastDate.temp.min
+          )}° </span>
+        </div>
+        </div>
+      </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "7059cb165caa3316bff682d263a01b1e";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+search("New York");
