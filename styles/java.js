@@ -31,7 +31,7 @@ function displayResults(response) {
   let wind = response.data.wind.speed;
   let feelsLike = document.querySelector("#feelsLike");
   let apTemp = Math.round(response.data.main.feels_like);
-  let iconElement = document.querySelector("#icon");
+  let iconElement = document.querySelector("#main-icon");
   let celsiusTemperature = response.data.main.temp;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
@@ -113,13 +113,13 @@ function displayForecast(response) {
 
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `<div class="row">`;
+  let forecastHTML = `<div class="neon-cards">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col-2">
+      <div class="card text-center">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         <img
           src="http://openweathermap.org/img/wn/${
@@ -147,9 +147,25 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "c76db1bd2c2a808bab15d20555e59a59";
+  let apiKey = "c8a77112b2faf6684bb4b21a0aa778ae";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
 search("San Francisco");
+
+//Using the geolocation for current location
+function searchLocation(position) {
+  let apiKey = "c76db1bd2c2a808bab15d20555e59a59";
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showTemperature);
+}
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+//Geolocation - Current location button
+let currentLocationButton = document.querySelector("#geolocationPin");
+currentLocationButton.addEventListener("click", getCurrentLocation);

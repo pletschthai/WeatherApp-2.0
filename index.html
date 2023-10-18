@@ -38,16 +38,7 @@
           <section form class="mt-3">
               <div class="row">
                 <div class="col text-center">
-                  <span id="description">Sunny</span>
-                  <br />
-                  <img
-                    src="icon/all/clear-day.svg"
-                    alt="Clear"
-                    id="main-icon"
-                    width="40"
-                  />
-                   <form class="search-form" id="searchCity">
-                </div>
+                  
                  <form class="search-form" id="searchCity">
                 <input
                   type="search"
@@ -56,34 +47,47 @@
                   id="cityInput"
                   class="form-control custom-btn btn-13"
                 />
-                <input type="submit" value="search"class="custom-btn btn-13">
+                <button type="submit" value="search"class="custom-btn btn-13">Search</button>
+             <button id="geolocationPin" class="custom-btn btn-13"><small>Current Location</small></button>
               </div>
             </form>
           </section>
         </div>
-        <section class="city">
+        <section class="city mt-3">
           <div class="row">
             <h1 id="city"></h1>
-            <div class="col-6" id="temperature-side">
+            <div class="col " id="temperature-side">
               <span class="temperature" id="temperature">22°</span>
               <span class="units">
                 <a href="#" id="celsius-link" class="active">°C</a> |
                 <a href="#" id="fahrenheit-link">°F</a>
               </span>
             </div>
-            <div class="col-6" id="description-side">
+            <div class="col mt-3">
+                <span id="description">Sunny</span>
+                  <br />
+                  <img
+                    src="icon/all/clear-day.svg"
+                    alt="Clear"
+                    id="main-icon"
+                    width="40"
+                  />
+            </div>
+            <div class="col mt-3" id="description-side">
              <div class="weatherInfo">
             <ul id="weatherInformation">
-              <li id="humidity"> </li>
-              <li id="wind"> </li>
+              <li id="humidity"></li>
+              <li id="wind"></li>
               <li id="feelsLike"></li>
+              
             </ul>
             </div>
+           
       
             </div>
           </div>
         </section>
-        <br><br><br><br>
+       
         <section class="forecast" id="forecast">Forecast for next 7 days</section>
       </div>
     </div>
