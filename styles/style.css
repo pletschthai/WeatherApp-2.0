@@ -11,8 +11,25 @@
 body {
   font-family: "oxanium";
   background: #000;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #001300;
+  overflow: hidden;
+  animation: animateColor 5s linear infinite;
+  cursor: url("https://64.media.tumblr.com/8b91e6445d5c4a4be545542486666928/7eefd2500f464426-4a/s100x200/4c6955e865e5366b36133eb201c795b618238363.gifv");
 }
 
+@keyframes animateColor {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
 .container {
   margin: 100px auto;
   color: #fff;
@@ -22,13 +39,13 @@ body {
   position: relative;
   background: #111;
   width: 600px;
-  height: 700px;
+  height: 900px;
   margin: 100px auto;
 }
 
 .shadow:before,
 .shadow:after {
-  z-index: -1;
+  z-index: -4;
   content: "";
   position: absolute;
   width: calc(100% + 6px);
@@ -52,7 +69,7 @@ body {
 }
 
 .shadow:after {
-  filter: blur(30px);
+  filter: blur(50px);
 }
 
 @keyframes shadow {
@@ -130,6 +147,9 @@ button {
   color: white;
 }
 
+#geolocationPin {
+  width: 10px;
+}
 li {
   text-decoration: none;
   list-style: none;
@@ -142,14 +162,17 @@ h1 {
   text-align: center;
 }
 
-#temperature {
+.temperature {
   font-size: 100px;
   position: relative;
   top: -10px;
   left: 30px;
+  color: #fff;
+  text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
+    0 0 80px #00b3ff, 0 0 120px #00b3ff;
 }
 
-#description {
+.description {
   text-transform: capitalize;
 }
 .forecast {
@@ -180,58 +203,27 @@ h1 {
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  .card {
-    position: relative;
-    padding: 10px 10px;
-    color: #f2f2f2;
-    font-family: monospace;
-    line-height: 1.5;
-    background: transparent;
-  }
+}
+.card {
+  position: relative;
+  padding: 2px;
+  color: #f2f2f2;
+  font-family: monospace;
+  line-height: 1.5;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .card:before,
-  .card:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
-  }
-
-  .card:after {
-    z-index: -2;
-    filter: blur(30px);
-  }
-
-  .card:nth-child(1):before,
-  .card:nth-child(1):after {
-    background: linear-gradient(235deg, #89ff00, #010615, #00bcd4);
-  }
-
-  .card:nth-child(2):before,
-  .card:nth-child(2):after {
-    background: linear-gradient(235deg, #ff005e, #010615, #fbff00);
-  }
-
-  .card:nth-child(3):before,
-  .card:nth-child(3):after {
-    background: linear-gradient(235deg, #772aff, #010615, #2196f3);
-  }
-  .card:nth-child(4):before,
-  .card:nth-child(4):after {
-    background: linear-gradient(235deg, #ff00ff, #010615, #ffbb00);
-  }
-
-  .card:nth-child(5):before,
-  .card:nth-child(5):after {
-    background: linear-gradient(235deg, #00ff00, #010615, #ff8800);
-  }
-
-  .card:nth-child(6):before,
-  .card:nth-child(6):after {
-    background: linear-gradient(235deg, #00ffff, #010615, #ff0055);
-  }
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .card img {
@@ -242,4 +234,66 @@ h1 {
 .card:hover {
   transition: all 400ms ease;
   background: rgba(255, 255, 255, 0.3);
+}
+
+.card:after {
+  z-index: -2;
+  filter: blur(30px);
+}
+
+.card:nth-child(1)::before,
+.card:nth-child(1)::after {
+  background: linear-gradient(235deg, #099fff, #9d00ff, #89ff00);
+}
+
+.card:nth-child(2)::before,
+.card:nth-child(2)::after {
+  background: linear-gradient(235deg, #ff005e, #4be700, #cff700);
+}
+
+.card:nth-child(3)::before,
+.card:nth-child(3)::after {
+  background: linear-gradient(235deg, #ff6600, #772aff, #ff6600, #0bf4f3);
+}
+.card:nth-child(4)::before,
+.card:nth-child(4)::after {
+  background: linear-gradient(235deg, #ff00ff, #0bf4f3, #ffbb00);
+}
+
+.card:nth-child(5)::before,
+.card:nth-child(5)::after {
+  background: linear-gradient(235deg, #00ff00, #ff0099, #ff8800);
+}
+
+.card:nth-child(6)::before,
+.card:nth-child(6)::after {
+  background: linear-gradient(235deg, #0bf4f3, #ffff00, #ff0055);
+}
+
+.forecast-content {
+  position: relative;
+  z-index: 2;
+  background: black;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  position: relative;
+  width: 800px;
+  height: 300px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box h1 {
+  color: #fff;
+  font-size: 5em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
+    0 0 80px #00b3ff, 0 0 120px #00b3ff;
 }

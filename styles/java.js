@@ -120,6 +120,7 @@ function displayForecast(response) {
         forecastHTML +
         `
       <div class="card text-center">
+      <div class="forecast-content">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         <img
           src="http://openweathermap.org/img/wn/${
@@ -135,6 +136,7 @@ function displayForecast(response) {
           <span class="weather-forecast-temperature-min"> ${Math.round(
             forecastDay.temp.min
           )}° </span>
+        </div>
         </div>
       </div>
   `;
