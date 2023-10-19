@@ -4,8 +4,8 @@
   --third-color: #003049;
   --gradient: linear-gradient(135deg, #72edf2 10%, #5151e5 100%);
   --box-shadow: 0 0 70px -10px rgb(255, 255, 255);
-  --neon-text-color: #f40;
-  --neon-border-color: #08f;
+  --chroma-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
+    0 0 80px #00b3ff, 0 0 120px #00b3ff;
 }
 
 body {
@@ -13,15 +13,20 @@ body {
   background: #000;
   position: relative;
   width: 100%;
-  height: 100vh;
+
   justify-content: center;
   align-items: center;
   background: #001300;
-  overflow: hidden;
+
   animation: animateColor 5s linear infinite;
   cursor: url("https://64.media.tumblr.com/8b91e6445d5c4a4be545542486666928/7eefd2500f464426-4a/s100x200/4c6955e865e5366b36133eb201c795b618238363.gifv");
 }
 
+@media (max-width: 768px) {
+  body {
+    font-size: 10px;
+  }
+}
 @keyframes animateColor {
   0% {
     filter: hue-rotate(0deg);
@@ -39,7 +44,7 @@ body {
   position: relative;
   background: #111;
   width: 600px;
-  height: 900px;
+  height: 920px;
   margin: 100px auto;
 }
 
@@ -87,14 +92,18 @@ body {
   text-align: center;
   font-size: 25px;
 }
-#fullDate {
+.date {
   font-size: 18px;
   text-align: center;
   position: relative;
   right: -29px;
+  bottom: -20px;
+  color: #fff;
+  text-shadow: var(--chroma-shadow);
 }
-#time {
-  font-size: 22px;
+.time {
+  font-size: 42px;
+  text-shadow: var(--chroma-shadow);
 }
 
 button {
@@ -139,16 +148,21 @@ button {
   top: 2px;
 }
 
+.form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
 .form-control {
   width: 230px;
   background: transparent;
   position: relative;
-  top: -3px;
+  top: -4px;
   color: white;
 }
 
-#geolocationPin {
-  width: 10px;
+.geoPin {
+  position: relative;
 }
 li {
   text-decoration: none;
@@ -168,8 +182,7 @@ h1 {
   top: -10px;
   left: 30px;
   color: #fff;
-  text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
-    0 0 80px #00b3ff, 0 0 120px #00b3ff;
+  text-shadow: var(--chroma-shadow);
 }
 
 .description {
@@ -180,8 +193,7 @@ h1 {
 }
 .weather-forecast-date {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0829be,
-    0 0 82px #0d2bb1, 0 0 92px #0c28a8, 0 0 102px #092086, 0 0 151px #050d33;
+  text-shadow: var(--chroma-shadow);
 }
 
 .units {
@@ -294,6 +306,5 @@ h1 {
   font-size: 5em;
   font-weight: 600;
   letter-spacing: 0.1em;
-  text-shadow: 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff,
-    0 0 80px #00b3ff, 0 0 120px #00b3ff;
+  text-shadow: var(--chroma-shadow);
 }
